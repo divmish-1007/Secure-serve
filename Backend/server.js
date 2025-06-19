@@ -5,21 +5,18 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-
-// ✅ Corrected CORS
+// ✅ CORS Setup
 const corsOptions = {
-  origin: "https://secure-serve.vercel.app", // Removed trailing slash
-  methods: ["GET", "POST", "OPTIONS"],
+  origin: "https://secure-serve.vercel.app",
+  methods: ["GET", "POST"],
   credentials: true,
 };
 app.use(cors(corsOptions));
 
-// ✅ Handle preflight OPTIONS requests
-app.options("/*", cors(corsOptions));
+// ✅ Body parser
+app.use(express.json());
 
-// 📩 Booking form route
+// ✅ Route
 app.post("/api/book", async (req, res) => {
   const { name, phone, address, message, serviceType, preferredDate } = req.body;
 
@@ -55,6 +52,11 @@ app.post("/api/book", async (req, res) => {
   }
 });
 
-// Server start
+// ✅ Default route (to avoid 404 on root)
+app.get("/", (req, res) => {
+  res.send("Backend is running securely.");
+});
+
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
