@@ -13,7 +13,6 @@ const House = () => (
   <>
     <HeroSection />
     <AboutSection />
-    <Footer />
   </>
 );
 
@@ -25,6 +24,7 @@ function App() {
         
         <main className="flex-grow">
           <Routes>
+            <Route path="/" element={<House />} /> 
             <Route path="/home" element={<Home />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/services" element={<Services />} />
