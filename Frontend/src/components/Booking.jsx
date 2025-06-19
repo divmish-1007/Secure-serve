@@ -9,7 +9,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("https://secure-serve-backend.onrender.com", {
+    const response = await fetch("https://secure-serve.onrender.com/api/book", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
